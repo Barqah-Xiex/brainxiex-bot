@@ -12,3 +12,6 @@ client.command("test2",(event) => {
     event.reply("ok");
 });
 
+client.ev.on('message',(m) => {
+    console.log(m.pushName,m.nomor,m.body);
+})
