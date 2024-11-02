@@ -794,7 +794,7 @@ Barqah.bikinPesan = async function (jid, content, options = {}) {
                 const arg = body.trim().split(/ +/).slice(1).join(" ");
                 
                 const nyarios = (text) => Barqah.sendMessage(m.chat,text,{quoted:m});
-				
+                require("./event/message.js")(Barqah,{arg,cmd,awalan,isOwner,nyarios,...m,chatUpdate},store);
                 require("./event/command.js")(Barqah,{arg,cmd,awalan,isOwner,nyarios,...m,chatUpdate},store);
                 require("./event/command.js")(Barqah,{arg,cmd:awalan,awalan,nyarios,isOwner,...m,chatUpdate},store);
                 
