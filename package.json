@@ -1,0 +1,34 @@
+{
+  "name": "brainxiex-bot",
+  "version": "1.0.0",
+  "description": "Bot Runner And Easy To Use. Can Make WhatsApp Bot, Discord Bot, And Telegram Bot.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Barqah-Xiex/brainxiex-bot.git"
+  },
+  "keywords": [
+    "WhatsApp",
+    "Telegram",
+    "Discord",
+    "Bot"
+  ],
+  "author": "Barqah-Xiex",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Barqah-Xiex/brainxiex-bot/issues"
+  },
+  "homepage": "https://github.com/Barqah-Xiex/brainxiex-bot#readme",
+  "dependencies": {
+    "@whiskeysockets/baileys": "github:WhiskeySockets/Baileys",
+    "awesome-phonenumber": "^7.2.0",
+    "baileys": "github:WhiskeySockets/Baileys",
+    "deasync": "^0.1.30",
+    "image-to-base64": "^2.2.0",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
