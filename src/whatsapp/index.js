@@ -246,8 +246,9 @@ function bot_whatsapp(config = {}) {
     }
     Barqah_profilePictureUrl = Barqah.profilePictureUrl;
     Barqah.getPP = function(orang,type="preview",timeout = 10000) {
-        if(store.contacts[orang]?.ppimg && store.contacts[orang]?.ppimg != `http://xiex.my.id/media/1655612010102undefined.png`) return store.contacts[orang].ppimg;
+       
         return new Promise(async(ok,no) => {
+	    if(store.contacts[orang]?.ppimg && store.contacts[orang]?.ppimg != `http://xiex.my.id/media/1655612010102undefined.png`) return ok(store.contacts[orang].ppimg);
             const res = await Barqah.query({
                 tag: 'iq',
                 attrs: {
