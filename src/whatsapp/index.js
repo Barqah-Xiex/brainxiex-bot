@@ -14,7 +14,7 @@ const PhoneNumber = require('awesome-phonenumber');
 const func = require(`../function.js`);
 const qrcode_terminal = require('qrcode-terminal');
 
-const { sleep, fs, smsg ,autorefresh, isset, exec, isJSONString, jsonparse, color, warna, f, awaiter, errorCode } = func;
+const { sleep, fs, smsg ,autorefresh, isset, exec, isJSONString, jsonparse, color, warna, f, errorCode } = func;
 
 
 /**
@@ -232,9 +232,8 @@ async function bot_whatsapp(config = {}) {
     }
     Barqah_profilePictureUrl = Barqah.profilePictureUrl;
     Barqah.getPP = function(orang,type="preview",timeout = 10000) {
-       
+        if(store.contacts[orang]?.ppimg && store.contacts[orang]?.ppimg != `http://xiex.my.id/media/1655612010102undefined.png`) return store.contacts[orang].ppimg;
         return new Promise(async(ok,no) => {
-	    if(store.contacts[orang]?.ppimg && store.contacts[orang]?.ppimg != `http://xiex.my.id/media/1655612010102undefined.png`) return ok(store.contacts[orang].ppimg);
             const res = await Barqah.query({
                 tag: 'iq',
                 attrs: {
@@ -385,7 +384,6 @@ async function bot_whatsapp(config = {}) {
     
     Barqah.copyNForward = async (jid, message, forceForward = false, options = {}) => {
         let vtype
-        console.log(message)
         if (options.readViewOnce) {
         message.message = message.message && message.message.ephemeralMessage && message.message.ephemeralMessage.message ? message.message.ephemeralMessage.message : (message.message || undefined)
         message.message.viewOnceMessage = {...message.message.viewOnceMessage, ...message.message.viewOnceMessageV2}
@@ -806,4 +804,4 @@ Barqah.bikinPesan = async function (jid, content, options = {}) {
  * @param {Object} [config.auth] - Authentication configuration
  * @returns {Object} WhatsApp connection instance
  */
-module.exports = (...a) => awaiter(bot_whatsapp(...a));
+module.exports = bot_whatsapp;
