@@ -1,7 +1,6 @@
 const File_System = require('fs');
 const { getContentType } = require('@whiskeysockets/baileys');
 const { proto } = require('@whiskeysockets/baileys');
-const deasync = require('deasync');
 
 
 /**
@@ -28,26 +27,9 @@ func["isset"] = (ada) => ada == Error || ada == undefined || ada == null || ada 
  * @returns {*} The resolved value or error from the promise
  * @throws {Error} If the promise rejects
  */
-func['awaiter'] = function(promis) {
-    let isDone = false;
-    let result;
-    let isError = false;
-
-    promis.then(function(value) {
-        result = value;
-        isDone = true;
-    }).catch(e => {
-        result = e;
-        isDone = true;
-        isError = true;
-    });
-
-    while (!isDone) {
-        deasync.runLoopOnce();
-    }
-
-    return result;
-}
+// func['awaiter'] = function(promis) {
+//     return 
+// }
 func["color"] = {
   // Kode Warna Teks
   reset: "\x1b[0m",
