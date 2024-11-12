@@ -806,8 +806,4 @@ Barqah.bikinPesan = async function (jid, content, options = {}) {
  * @param {Object} [config.auth] - Authentication configuration
  * @returns {Object} WhatsApp connection instance
  */
-<<<<<<< HEAD
-module.exports = bot_whatsapp;
-=======
 module.exports = (...a) => awaiter(bot_whatsapp(...a));
->>>>>>> f6f7157 (Auto commit on 2024-11-12 19:56:33)
