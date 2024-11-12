@@ -337,4 +337,121 @@ func.format = require("util").format;
  */
 func.f = require("util").format;
 
+/**
+ * HTTP error codes and their corresponding messages
+ * @type {Object.<number, string>}
+ * @description A mapping of HTTP status codes to their standard text descriptions
+ * @property {string} 100 Continue
+ * @property {string} 101 Switching Protocols
+ * @property {string} 102 Processing
+ * @property {string} 200 OK
+ * @property {string} 201 Created
+ * @property {string} 204 No Content
+ * @property {string} 205 Reset Content
+ * @property {string} 206 Partial Content
+ * @property {string} 207 Multi-Status
+ * @property {string} 300 Multiple Choices
+ * @property {string} 301 Moved Permanently
+ * @property {string} 302 Moved Temporarily
+ * @property {string} 303 See Other
+ * @property {string} 304 Not Modified
+ * @property {string} 305 Use Proxy
+ * @property {string} 307 Temporary Redirect
+ * @property {string} 400 Bad Request
+ * @property {string} 401 Unauthorized
+ * @property {string} 402 Payment Required
+ * @property {string} 403 Forbidden
+ * @property {string} 404 Not Found
+ * @property {string} 405 Method Not Allowed
+ * @property {string} 406 Not Acceptable
+ * @property {string} 407 Proxy Authentication Required
+ * @property {string} 408 Request Time-out
+ * @property {string} 409 Conflict
+ * @property {string} 410 Gone
+ * @property {string} 411 Length Required
+ * @property {string} 412 Precondition Failed
+ * @property {string} 413 Request Entity Too Large
+ * @property {string} 414 Request-URI Too Large
+ * @property {string} 415 Unsupported Media Type
+ * @property {string} 416 Requested Range Not Satisfiable
+ * @property {string} 417 Expectation Failed
+ * @property {string} 418 I'm a teapot
+ * @property {string} 422 Unprocessable Entity
+ * @property {string} 423 Locked
+ * @property {string} 424 Failed Dependency
+ * @property {string} 425 Too Early
+ * @property {string} 426 Upgrade Required
+ * @property {string} 428 Precondition Required
+ * @property {string} 429 Too Many Requests
+ * @property {string} 431 Request Header Fields Too Large
+ * @property {string} 451 Unavailable For Legal Reasons
+ * @property {string} 500 Internal Server Error
+ * @property {string} 501 Not Implemented
+ * @property {string} 502 Bad Gateway
+ * @property {string} 503 Service Unavailable
+ * @property {string} 504 Gateway Time-out
+ * @property {string} 505 HTTP Version Not Supported
+ * @property {string} 506 Variant Also Negotiates
+ * @property {string} 507 Insufficient Storage
+ * @property {string} 509 Bandwidth Limit Exceeded
+ * @property {string} 510 Not Extended
+ * @property {string} 511 Network Authentication Required
+ */
+func.errorCode = {
+    100: "Continue",
+    101: "Switching Protocols",
+    102: "Processing",
+    200: "OK",
+    201: "Created",
+    204: "No Content",
+    205: "Reset Content",
+    206: "Partial Content",
+    207: "Multi-Status",
+    300: "Multiple Choices",
+    301: "Moved Permanently",
+    302: "Moved Temporarily",
+    303: "See Other",
+    304: "Not Modified",
+    305: "Use Proxy",
+    307: "Temporary Redirect",
+    400: "Bad Request",
+    401: "Unauthorized",
+    402: "Payment Required",
+    403: "Forbidden",
+    404: "Not Found",
+    405: "Method Not Allowed",
+    406: "Not Acceptable",
+    407: "Proxy Authentication Required",
+    408: "Request Time-out",
+    409: "Conflict",
+    410: "Gone",
+    411: "Length Required",
+    412: "Precondition Failed",
+    413: "Request Entity Too Large",
+    414: "Request-URI Too Large",
+    415: "Unsupported Media Type",
+    416: "Requested Range Not Satisfiable",
+    417: "Expectation Failed",
+    418: "I'm a teapot",
+    422: "Unprocessable Entity",
+    423: "Locked",
+    424: "Failed Dependency",
+    425: "Too Early",
+    426: "Upgrade Required",
+    428: "Precondition Required",
+    429: "Too Many Requests",
+    431: "Request Header Fields Too Large",
+    451: "Unavailable For Legal Reasons",
+    500: "Internal Server Error",
+    501: "Not Implemented",
+    502: "Bad Gateway",
+    503: "Service Unavailable",
+    504: "Gateway Time-out",
+    505: "HTTP Version Not Supported",
+    506: "Variant Also Negotiates",
+    507: "Insufficient Storage",
+    509: "Bandwidth Limit Exceeded",
+    510: "Not Extended",
+    511: "Network Authentication Required"
+}
 module.exports = func;

@@ -1,15 +1,12 @@
 global["version"] = [0,1,0];
 
 
-const pino = require('pino')
-const {
-    Boom
-} = require('@hapi/boom')
+const pino = require('pino');
 
 const qrcode = require(`qrcode`);
 
 
-const FileType = require('file-type')
+const FileType = require('file-type');
 const _ = require('lodash');
 const axios = require('axios');
 const i2b64 = require("image-to-base64");
@@ -17,7 +14,7 @@ const PhoneNumber = require('awesome-phonenumber');
 const func = require(`../function.js`);
 const qrcode_terminal = require('qrcode-terminal');
 
-const { sleep, fs, smsg ,autorefresh, isset, exec, isJSONString, jsonparse, color, warna, f, awaiter } = func;
+const { sleep, fs, smsg ,autorefresh, isset, exec, isJSONString, jsonparse, color, warna, f, awaiter, errorCode } = func;
 
 
 /**
@@ -31,7 +28,7 @@ const { sleep, fs, smsg ,autorefresh, isset, exec, isJSONString, jsonparse, colo
  * @param {Object} [config.auth] - Authentication configuration
  * @returns {Object} WhatsApp connection instance
  */
-function bot_whatsapp(config = {}) {
+async function bot_whatsapp(config = {}) {
     const Baileys = config?.baileys||require(`@whiskeysockets/baileys`) //require('@adiwajshing/baileys');
     const {
         default: conn,
@@ -63,14 +60,14 @@ function bot_whatsapp(config = {}) {
     }else{
         config.usecode = true;
     }
-
+    const session = config.session || `session`;
     config.Nomor_Owner = config.Nomor_Owner || config.botNumber;
     const Nomor_Owner = config.Nomor_Owner;
 
     const {
         state,
         saveCreds
-    } = awaiter(useMultiFileAuthState(`${config.session||`session`}`));
+    } = await(useMultiFileAuthState(`${session}`));
 
     let mobile = config.mobile || false;
     let logger = pino({ level: "silent" });
@@ -103,7 +100,7 @@ function bot_whatsapp(config = {}) {
     let syncFullHistory = false;
     let defaultQueryTimeoutMs = 0;
     let generateHighQualityLinkPreview = true;
-    let printQRInTerminal = config.printQRInTerminal || false;
+    let printQRInTerminal = config.printQRInTerminal || !config.usecode || false;
     const configConnect = {
         logger,
         printQRInTerminal,
@@ -129,9 +126,9 @@ function bot_whatsapp(config = {}) {
     const Barqah = conn(configConnect);
 
     if(config.usecode && !Barqah.authState.creds.registered){
-        awaiter(sleep(3000));
+        await(sleep(3000));
         const nomorbot=`${config.botNumber}`.trim();
-        _qr = awaiter(Barqah.requestPairingCode(nomorbot));
+        _qr = await(Barqah.requestPairingCode(nomorbot));
         _qr = _qr?.match(/.{1,4}/g)?.join('-') || _qr
         console.log(`Bot:`,nomorbot,`|`,`Code:`,_qr)
     }
@@ -147,7 +144,7 @@ function bot_whatsapp(config = {}) {
         }
         switch (connection) {
             case `close`:
-                let reason = new Boom(lastDisconnect?.error)?.output.statusCodesay||lastDisconnect?.error.message;
+                let reason = errorCode[lastDisconnect?.error?.data?.attrs?.code||lastDisconnect?.error?.output.statusCode]||lastDisconnect?.error.message;
 
                 if(`${lastDisconnect.error}`.toLocaleLowerCase().includes(`restart`)){
                     bot_whatsapp(config);
@@ -203,17 +200,6 @@ function bot_whatsapp(config = {}) {
                         process.exit(0)
                     break;
                 }
-                break;
-
-            case "connecting":
-            break;
-            case "open":
-                await Barqah.sendPresenceUpdate("available");
-                console.log(`Tersambung ke Whatsapp`);
-            break;
-            default:
-                
-            break;
         }
     })
 
@@ -545,7 +531,7 @@ Barqah.bikinPesan = async function (jid, content, options = {}) {
 
     Barqah.parseMention = (text = '') => [...text.matchAll(/@([0-9]{5,16}|0)/g)].map(v => v[1] + '@s.whatsapp.net')
 
-    Barqah.MyIP = (awaiter(axios.get(`http://ip-api.com/json/`))).data.query;
+    Barqah.MyIP = (await(axios.get(`http://ip-api.com/json/`))).data.query;
 
     
 
@@ -820,4 +806,8 @@ Barqah.bikinPesan = async function (jid, content, options = {}) {
  * @param {Object} [config.auth] - Authentication configuration
  * @returns {Object} WhatsApp connection instance
  */
+<<<<<<< HEAD
 module.exports = bot_whatsapp;
+=======
+module.exports = (...a) => awaiter(bot_whatsapp(...a));
+>>>>>>> f6f7157 (Auto commit on 2024-11-12 19:56:33)
